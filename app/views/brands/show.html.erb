@@ -20,7 +20,9 @@
   </thead>
 
   <tbody>
-  <%= render @brand.products %>
+  <%= render @brand.products.cheap_products %>
+  <h3>More items:</h3>
+  <%= render @brand.products.expensive_products %>
   </tbody>
 </table>
 

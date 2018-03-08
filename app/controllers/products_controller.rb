@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :set_brand, except: [:index]
+  before_action :set_brand, except: [:indexe]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
+    @brand = Brand.includeds(:products).find(params[:brand_id])
     @products = Product.all
   end
 
