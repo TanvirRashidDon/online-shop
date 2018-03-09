@@ -5,8 +5,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @brand = Brand.includeds(:products).find(params[:brand_id])
-    @products = Product.all
+    @brand = Brand.includes(:products).find(params[:brand_id])
+    @products = @brand.products
   end
 
   # GET /products/1
@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = @brand.products.new
   end
 
   # GET /products/1/edit
@@ -26,12 +26,13 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
+    @product = @brand.products.new(product_params)
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
+        # format.html { redirect_to brand_product_path(@brand, @product), notice: 'Product was successfully created.' }
+        redirect_to [@brand, @product], notice: 'Product was successfully created.'
+        # format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
         format.json { render json: @product.errors, status: :unprocessable_entity }
@@ -58,22 +59,22 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to [@brand, :products], notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
   def set_brand
     @brand = Brand.find(params[:brand_id])
   end
-    def set_product
-      @product = @brand.product.find(params[:id])
-    end
+  def set_product
+    @product = @brand.products.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:brand_id, :name, :price)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.require(:product).permit(:brand_id, :name, :price)
+  end
 end
