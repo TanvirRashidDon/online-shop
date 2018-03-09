@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
 
 <h1>Products</h1>
 
@@ -12,20 +12,20 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="ui sortable called table">
     <% @products.each do |product| %>
         <tr>
           <td><%= product.brand %></td>
           <td><%= product.name %></td>
           <td><%= product.price %></td>
-          <td><%= link_to 'Show', [@brand, product] %></td>
-          <td>
+          <td class="positive"><%= link_to 'Show', [@brand, product] %></td>
+          <td class="warning">
             <%#= link_to 'Edit', edit_brand_product_path(@brand, product) %>
             <%= link_to 'Edit', [:edit, @brand, product] %>
           </td>
-          <td>
+          <td class="negative">
             <%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
-            <%= link_to 'Destroy',[@brand, product], method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to semantic_icon('trash') + 'Destroy', [@brand, product], method: :delete, data: { confirm: 'Are you sure?' } %>
           </td>
         </tr>
     <% end %>
