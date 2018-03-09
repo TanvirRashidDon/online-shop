@@ -45,8 +45,8 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @product }
+        format.html { redirect_to [@brand, @product], notice: 'Product was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@brand, @product] }
       else
         format.html { render :edit }
         format.json { render json: @product.errors, status: :unprocessable_entity }
