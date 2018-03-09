@@ -58,3 +58,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # for faker gem
 gem 'faker'
+
+# for simantic-ui https://github.com/doabit/semantic-ui-sass
+gem 'semantic-ui-sass'
