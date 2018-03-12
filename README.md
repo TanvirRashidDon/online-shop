@@ -2,9 +2,9 @@
 
 ## Online Shop
 
- Caccessible brand and product
+ categories brands and products
 
- One to many relation between brand to product
+ One to many relation between brands to products
 
  accessible from admin.
 
